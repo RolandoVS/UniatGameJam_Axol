@@ -31,16 +31,16 @@ public class ScriptReader : MonoBehaviour
 
     void Start()
     {
-        ItemCounter = 0;
-        LoadStory();
-        if (_SciptHistory.canContinue)
-        {
-            DialogBox.text = _SciptHistory.Continue();
-        }
-        else
-        {
-            EndingDialog();
-        }
+        // ItemCounter = 0;
+        // LoadStory();
+        // if (_SciptHistory.canContinue)
+        // {
+        //     DialogBox.text = _SciptHistory.Continue();
+        // }
+        // else
+        // {
+        //     EndingDialog();
+        // }
     }
     void Update()
     {
@@ -49,13 +49,16 @@ public class ScriptReader : MonoBehaviour
             DisplayNext();
         }
     }
-    public void DialogTrigger()//Displays dialog when picking up an item
+    public void DialogTrigger(Collider other)//Displays dialog when picking up an item
     {
-        ItemCounter++;
-        LoadStory();
+        if (other.tag == "Photo") {
+            ItemCounter++;
+            LoadStory();
+        }
     }
     void LoadStory()    //Loads story and assigns extra functions to change name and images from the InkJson file
     {
+        Debug.Log(ItemCounter);
         switch (ItemCounter)
         {
             case 0:
