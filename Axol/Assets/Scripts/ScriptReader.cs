@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Ink.Runtime;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class ScriptReader : MonoBehaviour
 {
@@ -31,16 +31,16 @@ public class ScriptReader : MonoBehaviour
 
     void Start()
     {
-        // ItemCounter = 0;
-        // LoadStory();
-        // if (_SciptHistory.canContinue)
-        // {
-        //     DialogBox.text = _SciptHistory.Continue();
-        // }
-        // else
-        // {
-        //     EndingDialog();
-        // }
+        ItemCounter = 0;
+        LoadStory();
+        if (_SciptHistory.canContinue)
+        {
+            DialogBox.text = _SciptHistory.Continue();
+        }
+        else
+        {
+            EndingDialog();
+        }
     }
     void Update()
     {
@@ -51,14 +51,13 @@ public class ScriptReader : MonoBehaviour
     }
     public void DialogTrigger(Collider other)//Displays dialog when picking up an item
     {
-        if (other.tag == "Photo") {
+        if (other.tag == "Candle") {
             ItemCounter++;
             LoadStory();
         }
     }
     void LoadStory()    //Loads story and assigns extra functions to change name and images from the InkJson file
     {
-        Debug.Log(ItemCounter);
         switch (ItemCounter)
         {
             case 0:
@@ -90,7 +89,18 @@ public class ScriptReader : MonoBehaviour
         _SciptHistory.BindExternalFunction("Name", (string charName) => ChangeName(charName));
         _SciptHistory.BindExternalFunction("Img", (string nameImg) => ChangeSprite(nameImg));
         _SciptHistory.BindExternalFunction("ImgR", (string nameImgR) => ChangeSprite2(nameImgR));
+        _SciptHistory.BindExternalFunction("GameOver", (string gameOver) => GameOver(gameOver));
     }
+
+    public void GameOver(string gameOver) //Loads a scene in unity with the game over message
+    {
+        Debug.Log(gameOver);
+        if (gameOver == "GAME OVER")
+        {
+            SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);//Needs scene called "GameOVer",will display it
+        }
+    }
+
     void PlayingDialog() //Notifies that a dialog is running, and enables the dialog panel
     {
         DialogPlaying = true;
@@ -107,7 +117,8 @@ public class ScriptReader : MonoBehaviour
         else
         {
             SpriteRenderer1.enabled = true;
-            SpriteRenderer1.sprite = Resources.Load<Sprite>("Characters/" + nameImg);
+            SpriteRenderer1.sprite = Resources.Load<Sprite>(nameImg);
+            Debug.Log($"Characters/{nameImg}.png");
         }
     }
     public void ChangeSprite2(string nameImgR) //Changes the right image according to the name in ink file
@@ -116,7 +127,7 @@ public class ScriptReader : MonoBehaviour
         else
         {
             SpriteRenderer2.enabled = true;
-            SpriteRenderer2.sprite = Resources.Load<Sprite>("Characters/" + nameImgR);
+            SpriteRenderer2.sprite = Resources.Load<Sprite>(nameImgR);
         }
     }
     public void DisplayNext()//Shows either next dialog line or the buttons with choices

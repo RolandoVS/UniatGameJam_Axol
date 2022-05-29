@@ -22,10 +22,10 @@ public class PickUpScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Candle")) {
             candles++;
+            scriptReader.DialogTrigger(other);
         }
         else if (other.gameObject.CompareTag("Photo")) { 
             photos++; 
-            scriptReader.DialogTrigger(other);
         }
         //else if (other.gameObject.CompareTag("Tridimin")) { gameOver(); }
     }

@@ -1,8 +1,8 @@
 EXTERNAL Name(charName)
 EXTERNAL Img(nameImg)
 EXTERNAL ImgR(nameImgR)
+EXTERNAL GameOver(gameOver)
 VAR Culpa = 0
-
  {Img("Alicia")}
  {ImgR("Jose")}
  {Name("Alicia")}
@@ -93,6 +93,7 @@ lo ves no mereces su compañía… no mereces a nadie
     {Img("")}
 Tridimin produce un grito horrendo 
 GAME OVER
+{GameOver("GAME OVER")}
 ->END
 
 ===SigMundo===
@@ -102,4 +103,5 @@ Mientes… tu no sabes nada de ellos, ni de mi, ellos siempre me acompañan y me
 ah sí? pues yo no los veo por aquí…. dime ¿qué es lo que más deseas?
  {Name("Alicia")}
 Solo quiero que mis amigos se queden conmigo
+{GameOver("GAME OVER")}
 ->END
