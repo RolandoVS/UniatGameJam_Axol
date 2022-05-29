@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ButtonnClick : MonoBehaviour
+public class ButtonClick : MonoBehaviour
 {
     public GameObject levelHolder;
     public Image credits;
