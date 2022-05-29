@@ -21,5 +21,6 @@ public class PickUpScript : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Candle")) { candles++; }
         else if (other.gameObject.CompareTag("Photo")) { photos++; }
+        //else if (other.gameObject.CompareTag("Tridimin")) { gameOver(); }
     }
 }
